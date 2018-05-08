@@ -21,7 +21,6 @@ class tree extends React.Component {
 
   componentDidMount() {
 
-
   }
 
   selectChile (item, key, keyPath) {
