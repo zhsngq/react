@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Table, Icon, Divider,Input,Select,Button } from 'antd';
 import { sendAsyncGet,send } from '../../actions'
 
-class Ztable extends React.Component {
+class ZtableFiter extends React.Component {
 
   constructor(props) {
     super(props);
@@ -12,12 +12,6 @@ class Ztable extends React.Component {
 
   componentDidMount() {
     this.props.loading();
-    let data = document.querySelectorAll('.z-search input');
-    for(let i=0; i<data.length ;i++) {
-      if (this.props.tableList.fiter[data[i].name]) {
-        data[i].value = this.props.tableList.fiter[data[i].name];
-      }
-    }
     let params  = this.props.tableList.fiter;
     params['page'] = this.props.tableList.page;
     this.props.ajaxlist(this.props.url, params);
@@ -26,13 +20,16 @@ class Ztable extends React.Component {
   // 点击搜索事件
   search (e) {
     this.props.loading();
-    let data = document.querySelectorAll('.z-search input');
-    for(let i=0; i<data.length ;i++) {
-      if (data[i].name)
-        this.props.tableList.fiter[data[i].name] = data[i].value;
-    }
-    this.props.tableList.fiter['page'] = this.props.tableList.page;
-    this.props.ajaxlist(this.props.url, this.props.tableList.fiter);
+    let params  = this.props.tableList.fiter;
+    params['page'] = this.props.tableList.page;
+    this.props.ajaxlist(this.props.url, params);
+  }
+
+  // 过滤参数变化在这里设置
+  searchChange(e) {
+    let fiter = this.props.tableList.fiter;
+    fiter[e.target.name] = e.target.value;
+    this.props.fiter(fiter);
   }
 
   propTypes: {
@@ -52,27 +49,18 @@ class Ztable extends React.Component {
         this.props.ajaxlist(this.props.url, params);
       }
     };
-    // React.Children.map(this.props.children, function (child) {
-    //   console.log(child.refs);
-    //   React.cloneElement(child, { key:data.id, data:data })
-    // });
+    const children = this.props.children;
+    console.log(children
+      );
     return (
       <div>
         <div class="z-search">
-          {
-            this.props.children
-          }
-        {/*  <div class="group">
+          <div class="group">
             <lable>zhsngq：</lable>
             <Input name="name" type="text" value={this.props.tableList.fiter.name} onChange={(e)=>this.searchChange(e)} />
-          </div>*/}
+          </div>
           <Button type="primary" htmlType="button" onClick={(e)=> this.search(e)} >搜索</Button>
         </div>
-        <Table rowKey={record => record.id}
-               loading={this.props.tableList.loading}
-               pagination={pageOp} columns = {this.props.columns}
-               dataSource = {this.props.tableList.list}
-               size="middle" />
       </div>
       );
   }
@@ -90,5 +78,4 @@ const mapDispatchToProps = dispatch => ({
   fiter : (data) => dispatch(send('fiter',data)),
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(Ztable)
-
+export default connect(mapStateToProps,mapDispatchToProps)(ZtableFiter)

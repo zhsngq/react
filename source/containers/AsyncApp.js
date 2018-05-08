@@ -17,6 +17,8 @@ import Bottom from "../components/layout/bottom"
 import Menux from "../components/layout/menux"
 import CustomerList from "../tmp/customer/CustomerList"
 import CustomerEdit from "../tmp/customer/CustomerEdit"
+import Test from "../tmp/test/Test"
+import Ztable from "../components/plugin/Ztable.js"
 import NormalLoginForm from "../components/plugin/NormalLoginForm"
 
 import {
@@ -63,6 +65,7 @@ class AsyncApp extends React.Component {
         <Switch>
           <Route path='/customer/:id' component={CustomerEdit} />
           <Route path='/customer' component={CustomerList} />
+          <Route path='/test' component={Test} />
           <Route path='/login' component={NormalLoginForm} />
         </Switch>
         )}/>
