@@ -20,6 +20,8 @@ class tree extends React.Component {
   }
 
   componentDidMount() {
+
+
   }
 
   selectChile (item, key, keyPath) {
@@ -42,17 +44,37 @@ class tree extends React.Component {
   mapArray(arr, j) {
     let res = [];
     for (let i in arr) {
+      let key = "";
+      if (j) {
+        key = j + "/" ;
+      }
+      key += arr[i].name;
+      arr[i].link;
+
+      let myregexp = /#\/((\w|\/)*)/m;
+      let match = myregexp.exec(location.hash);
+      let result = '';
+      if (match != null) {
+        result = match[1];
+      } else {
+        result = "";
+      }
+      console.log(result);
       if (arr[i]['child']) {
         let re = this.mapArray(arr[i]['child'], j + arr[i]['name']);
         res.push(<SubMenu
-                key={i}
+                key={key}
                 title={
                     <span><Icon type={arr[i].icon} />
                     <span>{arr[i].name}</span></span>
                 }
                 children={re} />);
       } else {
-        let key = j + "/" + arr[i].name;
+        if (arr[i].link == "/" + result) {
+          console.log(key,j);
+          this.props.tree.action= key;
+          this.props.tree.openkey= j;
+        }
         res.push(
             <Menu.Item key={key}>
               <Link to={arr[i].link}>
@@ -70,13 +92,16 @@ class tree extends React.Component {
   render() {
     let treeData = this.props.tree;
     let show = this.props.isShow ? 'block' : 'none';
+    let menuTree = this.mapArray(treeData.data,'');
     return (
           <Sider style={{display:show}}
             collapsible collapsed={treeData.collapsed} onCollapse={this.onCollapse} >
             <div className="logo" />
-            <Menu theme="dark"  mode="inline" onClick={(item, key, keyPath)=>this.selectChile(item, key, keyPath)}>
+            <Menu defaultOpenKeys={[this.props.tree.openkey]}
+              defaultSelectedKeys={[this.props.tree.action]} theme="dark"  mode="inline"
+              onClick={(item, key, keyPath)=>this.selectChile(item, key, keyPath)}>
             {
-              this.mapArray(treeData.data,'')
+              menuTree
             }
             </Menu>
           </Sider>

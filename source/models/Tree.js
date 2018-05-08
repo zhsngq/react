@@ -6,6 +6,7 @@ import {
 export const data = {
   collapsed: false,
   action : '',
+  openkey : '',
   data: [{
     icon: 'setting',
     name: '系统',
