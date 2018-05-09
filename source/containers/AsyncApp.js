@@ -43,17 +43,14 @@ class AsyncApp extends React.Component {
     super(props)
   }
   componentDidMount() {
-    console.log('app',this.props.user);
   }
   componentWillReceiveProps(nextProps) {
   }
 
   componentWillReceiveProps(){
-    console.log("============>");
   }
 
   render() {
-    console.log('------APP--------');
     if (this.props.user.token) {
       localStorage.setItem('token',this.props.user.token);
     }
