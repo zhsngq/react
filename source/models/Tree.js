@@ -7,6 +7,7 @@ export const data = {
   collapsed: false,
   action : '',
   openkey : '',
+  map:{},
   data: [{
     icon: 'setting',
     name: '系统',
@@ -18,7 +19,7 @@ export const data = {
     },{
       icon: 'user',
       name: '编辑用户',
-      link: '/customer/new'
+      link: '/customerEdit'
     }]
   }]
 };

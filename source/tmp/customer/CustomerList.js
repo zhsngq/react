@@ -22,7 +22,7 @@ const columns = [{
   key: 'action',
   render: (text, record) => (
     <span>
-      <a href={"#/customer/"+record.id}>修改</a>
+      <a href={"#/customerEdit?id="+record.id}>修改</a>
     </span>
     ),
 }];

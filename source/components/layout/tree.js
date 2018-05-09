@@ -20,7 +20,6 @@ class tree extends React.Component {
   }
 
   componentDidMount() {
-
   }
 
   selectChile (item, key, keyPath) {
@@ -70,10 +69,10 @@ class tree extends React.Component {
                 children={re} />);
       } else {
         if (arr[i].link == "/" + result) {
-          console.log(key,j);
           this.props.tree.action= key;
           this.props.tree.openkey= j;
         }
+        this.props.tree.map[arr[i].link] = key;
         res.push(
             <Menu.Item key={key}>
               <Link to={arr[i].link}>

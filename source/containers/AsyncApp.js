@@ -46,8 +46,12 @@ class AsyncApp extends React.Component {
     console.log('app',this.props.user);
   }
   componentWillReceiveProps(nextProps) {
-    console.log(this.props.user);
   }
+
+  componentWillReceiveProps(){
+    console.log("============>");
+  }
+
   render() {
     console.log('------APP--------');
     if (this.props.user.token) {
@@ -63,7 +67,7 @@ class AsyncApp extends React.Component {
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
       <Route path="/" component={(props) => (
         <Switch>
-          <Route path='/customer/:id' component={CustomerEdit} />
+          <Route path='/customerEdit' component={CustomerEdit} />
           <Route path='/customer' component={CustomerList} />
           <Route path='/test' component={Test} />
           <Route path='/login' component={NormalLoginForm} />

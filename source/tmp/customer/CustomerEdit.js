@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { connect } from 'react-redux'
+import Base from "../../components/plugin/BaseRoute";
+import { connect } from 'react-redux';
 import {Spin, Icon, Form, Input, Tooltip, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
-import { sendAsyncGet,sendAsyncPost } from '../../actions'
+import { send,sendAsyncGet,sendAsyncPost } from '../../actions';
 
 const FormItem = Form.Item;
 const antIcon = <Icon type="loading" style={{ fontSize: 50 }} spin />;
 
-class CustomerEdit extends React.Component {
+class CustomerEdit extends Base {
 
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    if ( !isNaN(this.props.match.params.id) ) {
-      this.props.getModel(this.props.match.params);
+    if ( !isNaN(this.getRequest().id) ) {
+      this.props.getModel(this.getRequest());
     }
   }
 
@@ -84,7 +85,8 @@ const CustomerEditFrom = Form.create()(CustomerEdit);
 
 function mapStateToProps(state) {
   return {
-    customer : state.customer
+    customer : state.customer,
+    tree : state.tree,
   }
 }
 
