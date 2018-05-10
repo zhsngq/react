@@ -70,8 +70,8 @@ class tree extends React.Component {
                 children={re} />);
       } else {
         if (arr[i].link == "/" + result) {
-          this.props.tree.action= key;
-          this.props.tree.openkey= j;
+          // this.props.tree.action= key;
+          // this.props.tree.openkey= j;
         }
         this.props.tree.map[arr[i].link] = key;
         res.push(
@@ -96,8 +96,10 @@ class tree extends React.Component {
           <Sider style={{display:show}}
             collapsible collapsed={treeData.collapsed} onCollapse={this.onCollapse} >
             <div className="logo" />
-            <Menu defaultOpenKeys={[this.props.tree.openkey]}
-              defaultSelectedKeys={[this.props.tree.action]} theme="dark"  mode="inline"
+            <Menu
+              openKeys={[this.props.tree.openkey]}
+              selectedKeys={[this.props.tree.action]}
+              theme="dark"  mode="inline"
               onClick={(item, key, keyPath)=>this.selectChile(item, key, keyPath)}>
             {
               menuTree

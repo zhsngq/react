@@ -17,7 +17,6 @@ import Bottom from "../components/layout/bottom"
 import Menux from "../components/layout/menux"
 import CustomerList from "../tmp/customer/CustomerList"
 import CustomerEdit from "../tmp/customer/CustomerEdit"
-import Test from "../tmp/test/Test"
 import Ztable from "../components/plugin/Ztable.js"
 import NormalLoginForm from "../components/plugin/NormalLoginForm"
 
@@ -58,7 +57,6 @@ class AsyncApp extends React.Component {
       localStorage.setItem('token',this.props.user.token);
     }
     let token = localStorage.getItem('token');
-    console.log('------------------->');
     return (
       <Router>
       <Layout style={{ minHeight: '100vh' }}>
@@ -71,7 +69,6 @@ class AsyncApp extends React.Component {
               <Switch>
                 <Route path='/customerEdit' component={CustomerEdit} />
                 <Route path='/customer' component={CustomerList} />
-                <Route path='/test' component={Test} />
                 <Route path='/login' component={NormalLoginForm} />
               </Switch>
               )

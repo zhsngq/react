@@ -34,6 +34,11 @@ export default function action(state = data, action) {
     case 'actionName' :
       state.action = action.model.name;
       return Object.assign({}, state);
+    case 'onAction' :
+      console.log("onAction =+=======================>");
+      state.action = action.model.action;
+      state.openkey = action.model.openkey;
+      return Object.assign({}, state);
     default:
       return state
   }
