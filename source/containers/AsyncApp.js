@@ -43,18 +43,22 @@ class AsyncApp extends React.Component {
     super(props)
   }
   componentDidMount() {
+    console.log('componentDidMount');
   }
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps');
+  }
+  componentDidUpdate(){
+    console.log('componentDidUpdate');
   }
 
-  componentWillReceiveProps(){
-  }
 
   render() {
     if (this.props.user.token) {
       localStorage.setItem('token',this.props.user.token);
     }
     let token = localStorage.getItem('token');
+    console.log('asdf');
     return (
       <Router>
       <Layout style={{ minHeight: '100vh' }}>
@@ -62,26 +66,30 @@ class AsyncApp extends React.Component {
       <Content style={{ margin: '0 16px' }}>
       <Menux  />
       <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-      <Route path="/" component={(props) => (
-        <Switch>
-          <Route path='/customerEdit' component={CustomerEdit} />
-          <Route path='/customer' component={CustomerList} />
-          <Route path='/test' component={Test} />
-          <Route path='/login' component={NormalLoginForm} />
-        </Switch>
-        )}/>
-      </div>
-      <Bottom />
-      </Content>
-      </Layout>
-      </Router>
-      )
+      <Route path="/" component={(props) => {
+        return  (
+          <Switch>
+            <Route path='/customerEdit' component={CustomerEdit} />
+            <Route path='/customer' component={CustomerList} />
+            <Route path='/test' component={Test} />
+            <Route path='/login' component={NormalLoginForm} />
+          </Switch>
+          )
+      }
+    }/>
+    </div>
+    <Bottom />
+    </Content>
+    </Layout>
+    </Router>
+    )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    tree:state.tree
   }
 }
 
