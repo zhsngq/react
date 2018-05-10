@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
+
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import {send} from '../../actions';
 
@@ -75,10 +76,10 @@ class tree extends React.Component {
         this.props.tree.map[arr[i].link] = key;
         res.push(
             <Menu.Item key={key}>
-              <Link to={arr[i].link}>
+              <NavLink to={arr[i].link} >
                 <Icon type={arr[i].icon} />
                 <span>{arr[i].name}</span>
-              </Link>
+              </NavLink>
             </Menu.Item>
           )
       }

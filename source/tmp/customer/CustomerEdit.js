@@ -17,6 +17,9 @@ class CustomerEdit extends Base {
   componentDidMount() {
     if ( !isNaN(this.getRequest().id) ) {
       this.props.getModel(this.getRequest());
+    } else {
+      this.props.customer.id=0;
+      this.props.customer.name='';
     }
   }
 

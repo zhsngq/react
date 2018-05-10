@@ -58,28 +58,28 @@ class AsyncApp extends React.Component {
       localStorage.setItem('token',this.props.user.token);
     }
     let token = localStorage.getItem('token');
-    console.log('asdf');
+    console.log('------------------->');
     return (
       <Router>
       <Layout style={{ minHeight: '100vh' }}>
-      <Tree  isShow={token} />
-      <Content style={{ margin: '0 16px' }}>
-      <Menux  />
-      <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-      <Route path="/" component={(props) => {
-        return  (
-          <Switch>
-            <Route path='/customerEdit' component={CustomerEdit} />
-            <Route path='/customer' component={CustomerList} />
-            <Route path='/test' component={Test} />
-            <Route path='/login' component={NormalLoginForm} />
-          </Switch>
-          )
-      }
-    }/>
-    </div>
-    <Bottom />
-    </Content>
+        <Tree  isShow={token} />
+        <Content style={{ margin: '0 16px' }}>
+          <Menux  />
+          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+          <Route path="/" component={(props) => {
+            return  (
+              <Switch>
+                <Route path='/customerEdit' component={CustomerEdit} />
+                <Route path='/customer' component={CustomerList} />
+                <Route path='/test' component={Test} />
+                <Route path='/login' component={NormalLoginForm} />
+              </Switch>
+              )
+          }
+        }/>
+        </div>
+        <Bottom />
+      </Content>
     </Layout>
     </Router>
     )
