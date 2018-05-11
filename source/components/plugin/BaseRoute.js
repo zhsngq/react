@@ -3,6 +3,10 @@ import { send,sendAsyncGet,sendAsyncPost } from '../../actions';
 
 export default class BaseRoute extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   getQueryString(name) {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     let r = this.props.location.search.substr(1).match(reg);

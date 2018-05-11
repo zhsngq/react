@@ -11,15 +11,7 @@ class Mex extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.tree.action= this.props.action;
-    // this.props.tree.openkey= this.props.openkey;
-    if (this.props.action !=this.props.tree.action ) {
-      this.props.tree.action = this.props.action;
-      this.props.actionSend({
-        mex : true,
-        openkey:this.props.openkey
-      });
-    }
+
   }
 
   propTypes: {

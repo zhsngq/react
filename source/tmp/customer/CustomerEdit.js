@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Mex from '../../components/plugin/Mex';
 import Base from "../../components/plugin/BaseRoute";
 import { connect } from 'react-redux';
 import {Spin, Icon, Form, Input, Tooltip, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
@@ -13,6 +12,11 @@ class CustomerEdit extends Base {
 
   constructor(props) {
     super(props);
+    this.props.tree.action = "编辑/用户";
+    this.props.actionSend({
+      mex : true,
+      openkey:"编辑"
+    });
   }
 
   componentDidMount() {
@@ -67,7 +71,6 @@ class CustomerEdit extends Base {
     console.log(customer);
     return (
         <Form onSubmit={(e)=>this.handleSubmit(e)}>
-          <Mex openkey="编辑" action="编辑/用户" />
           <input name='id' value={customer.id} type='hidden' />
           <FormItem {...formItemLayout} label="id">
             {getFieldDecorator("id",{ initialValue:customer.id ,rules: [],
@@ -91,13 +94,14 @@ const CustomerEditFrom = Form.create()(CustomerEdit);
 function mapStateToProps(state) {
   return {
     customer : state.customer,
-    tree : state.tree,
+    tree:state.tree
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getModel : (data) => dispatch(sendAsyncGet('getModel',`admin/user/${data.id}`,{})),
   save : (data) => dispatch(sendAsyncPost('save',`admin/user/edit`,data)),
+  actionSend : (data) => dispatch(send('openAction',data)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(CustomerEditFrom)

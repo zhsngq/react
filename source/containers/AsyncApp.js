@@ -42,7 +42,7 @@ class AsyncApp extends React.Component {
     super(props)
   }
   componentDidMount() {
-    console.log('componentDidMount');
+
   }
   componentWillReceiveProps(nextProps) {
     console.log('componentWillReceiveProps');
@@ -85,8 +85,7 @@ class AsyncApp extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
-    tree:state.tree
+    user: state.user
   }
 }
 

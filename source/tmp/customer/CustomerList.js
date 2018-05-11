@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Base from "../../components/plugin/BaseRoute";
 import Ztable from '../../components/plugin/Ztable';
-import Mex from '../../components/plugin/Mex';
 import { Table, Icon, Divider,Input,Select,Button } from 'antd';
 import { sendAsyncGet,send } from '../../actions'
 
@@ -32,11 +31,19 @@ const columns = [{
 
 class CustomerList extends Base {
 
+  constructor(props) {
+    super(props);
+    this.props.tree.action = "系统/用户";
+    this.props.actionSend({
+      mex : true,
+      openkey:"系统"
+    });
+  }
+
   //组件内部代码
   render() {
     return (
       <div>
-        <Mex openkey="系统" action="系统/用户" />
         <Ztable url="admin/user/list" columns={columns}>
           <div class="group">
             <lable>zhsngq：</lable>
@@ -48,4 +55,14 @@ class CustomerList extends Base {
   }
 }
 
-export default connect()(CustomerList)
+function mapStateToProps(state) {
+  return {
+    tree:state.tree
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  actionSend : (data) => dispatch(send('openAction',data)),
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(CustomerList)
