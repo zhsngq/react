@@ -36,7 +36,7 @@ class CustomerList extends Base {
   render() {
     return (
       <div>
-        <Mex action="系统/用户" openkey="系统" />
+        <Mex openkey="系统" action="系统/用户" />
         <Ztable url="admin/user/list" columns={columns}>
           <div class="group">
             <lable>zhsngq：</lable>

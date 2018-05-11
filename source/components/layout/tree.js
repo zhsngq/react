@@ -29,6 +29,19 @@ class tree extends React.Component {
     }));
   }
 
+  openChile (key, domEvent) {
+    // console.log(`key:${key}`);
+    for(let i in this.props.tree.openkey){
+      if (this.props.tree.openkey[i] == key.key){
+        this.props.tree.openkey.splice(i,1);
+        console.log(this.props.tree.openkey);
+        return true;
+      }
+    }
+    this.props.tree.openkey.push(key.key);
+    console.log(this.props.tree.openkey);
+  }
+
   propTypes: {
     isShow : PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -63,6 +76,7 @@ class tree extends React.Component {
         let re = this.mapArray(arr[i]['child'], j + arr[i]['name']);
         res.push(<SubMenu
                 key={key}
+                onTitleClick={(key, domEvent)=>this.openChile(key, domEvent)}
                 title={
                     <span><Icon type={arr[i].icon} />
                     <span>{arr[i].name}</span></span>
@@ -97,7 +111,7 @@ class tree extends React.Component {
             collapsible collapsed={treeData.collapsed} onCollapse={this.onCollapse} >
             <div className="logo" />
             <Menu
-              openKeys={[this.props.tree.openkey]}
+              openKeys={this.props.tree.openkey}
               selectedKeys={[this.props.tree.action]}
               theme="dark"  mode="inline"
               onClick={(item, key, keyPath)=>this.selectChile(item, key, keyPath)}>

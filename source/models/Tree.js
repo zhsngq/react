@@ -6,7 +6,7 @@ import {
 export const data = {
   collapsed: false,
   action : '',
-  openkey : '',
+  openkey : [],
   map:{},
   data: [{
     icon: 'setting',
@@ -16,10 +16,15 @@ export const data = {
       icon: 'user',
       name: '用户',
       link: '/customer'
-    },{
+    }]
+  },{
+    icon: 'setting',
+    name: '编辑',
+    link: '/',
+    child: [{
       icon: 'user',
-      name: '编辑用户',
-      link: '/customerEdit'
+      name: '用户',
+      link: '/customeredit'
     }]
   }]
 };
@@ -34,10 +39,16 @@ export default function action(state = data, action) {
     case 'actionName' :
       state.action = action.model.name;
       return Object.assign({}, state);
-    case 'onAction' :
-      console.log("onAction =+=======================>");
-      state.action = action.model.action;
-      state.openkey = action.model.openkey;
+    case 'openAction' :
+      for(let i in state.openkey){
+        if (state.openkey[i] == action.model.openkey){
+          if (!action.model['mex']) {
+            state.openkey.splice(i,1);
+          }
+          return Object.assign({}, state);
+        }
+      }
+      state.openkey.push(action.model.openkey);
       return Object.assign({}, state);
     default:
       return state

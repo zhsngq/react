@@ -13,9 +13,10 @@ class Mex extends React.Component {
   componentDidMount() {
     // this.props.tree.action= this.props.action;
     // this.props.tree.openkey= this.props.openkey;
-    if (this.props.action !=this.props.tree.action || this.props.openkey !=this.props.tree.openkey) {
+    if (this.props.action !=this.props.tree.action ) {
+      this.props.tree.action = this.props.action;
       this.props.actionSend({
-        action:this.props.action,
+        mex : true,
         openkey:this.props.openkey
       });
     }
@@ -38,7 +39,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  actionSend : (data) => dispatch(send('onAction',data)),
+  actionSend : (data) => dispatch(send('openAction',data)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Mex)

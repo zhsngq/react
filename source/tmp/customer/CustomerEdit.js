@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Mex from '../../components/plugin/Mex';
 import Base from "../../components/plugin/BaseRoute";
 import { connect } from 'react-redux';
 import {Spin, Icon, Form, Input, Tooltip, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
@@ -66,6 +67,7 @@ class CustomerEdit extends Base {
     console.log(customer);
     return (
         <Form onSubmit={(e)=>this.handleSubmit(e)}>
+          <Mex openkey="编辑" action="编辑/用户" />
           <input name='id' value={customer.id} type='hidden' />
           <FormItem {...formItemLayout} label="id">
             {getFieldDecorator("id",{ initialValue:customer.id ,rules: [],
