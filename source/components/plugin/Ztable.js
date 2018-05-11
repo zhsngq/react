@@ -35,6 +35,10 @@ class Ztable extends React.Component {
     this.props.ajaxlist(this.props.url, this.props.tableList.fiter);
   }
 
+  select(selectedRowKeys, selectedRows){
+    this.props.tableList.selectKeys = selectedRowKeys;
+  }
+
   propTypes: {
     dispatch: PropTypes.func.isRequired
   }
@@ -56,23 +60,28 @@ class Ztable extends React.Component {
     //   console.log(child.refs);
     //   React.cloneElement(child, { key:data.id, data:data })
     // });
+
     return (
       <div>
         <div class="z-search">
           {
             this.props.children
           }
-        {/*  <div class="group">
-            <lable>zhsngq：</lable>
-            <Input name="name" type="text" value={this.props.tableList.fiter.name} onChange={(e)=>this.searchChange(e)} />
-          </div>*/}
           <Button type="primary" htmlType="button" onClick={(e)=> this.search(e)} >搜索</Button>
         </div>
         <Table rowKey={record => record.id}
+               rowSelection={{onChange:(selectedRowKeys, selectedRows)=>{this.select(selectedRowKeys, selectedRows)}}}
                loading={this.props.tableList.loading}
                pagination={pageOp} columns = {this.props.columns}
                dataSource = {this.props.tableList.list}
                size="middle" />
+        <div className="tableControl">
+          <div>
+            <Button onClick={this.setAgeSort}>删除选择</Button>
+            <Button onClick={this.clearFilters}>启用选择</Button>
+            <Button onClick={this.clearAll}>禁用选择</Button>
+          </div>
+        </div>
       </div>
       );
   }

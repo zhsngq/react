@@ -7,6 +7,7 @@ export const data = {
     "id": 0,
     "username": "",
   },
+  selectKeys : [],
   fiter : {},
   loading:false,
   list: [],
