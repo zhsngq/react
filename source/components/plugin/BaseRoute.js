@@ -1,10 +1,17 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { send,sendAsyncGet,sendAsyncPost } from '../../actions';
 
 export default class BaseRoute extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+
+
+  routerWillLeave(nextLocation){
+    return '确认要离开？';
   }
 
   getQueryString(name) {

@@ -65,13 +65,13 @@ class tree extends React.Component {
 
       let myregexp = /#\/((\w|\/)*)/m;
       let match = myregexp.exec(location.hash);
+      console.log(match);
       let result = '';
       if (match != null) {
         result = match[1];
       } else {
         result = "";
       }
-      console.log(result);
       if (arr[i]['child']) {
         let re = this.mapArray(arr[i]['child'], j + arr[i]['name']);
         res.push(<SubMenu
@@ -105,6 +105,7 @@ class tree extends React.Component {
   render() {
     let treeData = this.props.tree;
     let show = this.props.isShow ? 'block' : 'none';
+    console.log(treeData);
     let menuTree = this.mapArray(treeData.data,'');
     return (
           <Sider style={{display:show}}
@@ -115,9 +116,9 @@ class tree extends React.Component {
               selectedKeys={[this.props.tree.action]}
               theme="dark"  mode="inline"
               onClick={(item, key, keyPath)=>this.selectChile(item, key, keyPath)}>
-            {
-              menuTree
-            }
+              {
+                menuTree
+              }
             </Menu>
           </Sider>
     );
